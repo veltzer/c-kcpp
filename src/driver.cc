@@ -2,7 +2,6 @@
 
 class Driver {
 public:
-	int x;
 	Driver() {
 		service_puts("inside constructor!\n");
 	}
