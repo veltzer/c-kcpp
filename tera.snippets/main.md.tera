@@ -29,6 +29,17 @@ This is to be developed as a patch to the linux kernel (big project - watch out!
 may never happen...)
 * add a framework for writing char drivers
 
+## Layout:
+* `src/` - the module sources: C, C++, headers and the `Kbuild` file that
+describes the module to the kernel build system.
+* `src/std_module/` - a minimal sample module, built only to read off the
+C flags the kernel uses so they can be adapted for the C++ parts.
+* `scripts/` - the build driver (`build_kcpp.py`, run by rsconstruct) and helpers.
+* `doc/` - notes on the problems met along the way, in markdown.
+* `out/` - the build results: `kcpp.ko` and the `flags.cfg` its C++ parts were
+compiled with. The build itself runs in a temporary directory, so nothing else
+is produced. Not checked in; `rm -rf out` is a full clean.
+
 ## Related projects:
 * http://code.google.com/p/kernelcpp/
 They do not have a buffer layer but instead do "extern C" before kernel headers.

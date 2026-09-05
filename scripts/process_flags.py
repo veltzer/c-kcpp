@@ -77,15 +77,17 @@ def main():
     """ main entry point """
     do_pass_kdir=True
     do_clean=True
-    if len(sys.argv)!=3:
-        print(f"{sys.argv[0]}: usage: {sys.argv[0]} kdir outfile")
+    if len(sys.argv)!=4:
+        print(f"{sys.argv[0]}: usage: {sys.argv[0]} kdir std_module_dir outfile")
         sys.exit(1)
     kdir=sys.argv[1]
-    outfile=sys.argv[2]
+    std_module=os.path.abspath(sys.argv[2])
+    outfile=sys.argv[3]
 
-    # build the sample module in std_module/ (described by its Kbuild file)
-    # verbosely, so the kernel prints the exact gcc command line it uses
-    std_module=os.path.join(os.getcwd(), "std_module")
+    # build the sample module (described by the Kbuild file in std_module_dir,
+    # a scratch copy of src/std_module that scripts/build_kcpp.py makes in its
+    # temporary build directory) verbosely, so the kernel prints the exact
+    # gcc command line it uses
     args=[
         "make",
         "-C", kdir if do_pass_kdir else f"/lib/modules/{os.uname().release}/build",

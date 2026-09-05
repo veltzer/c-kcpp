@@ -1,0 +1,11 @@
+# Kernel build description for the kcpp module. scripts/build_kcpp.py copies
+# src/ to a temporary directory and runs `make -C <kernel build dir> M=<that
+# directory> modules` there, so Kbuild reads this file and the sources from
+# the copy and leaves its objects, the generated kcpp.mod.c and the module
+# beside them; only kcpp.ko is copied back to out/. The C objects are built
+# by Kbuild; the C++ objects are compiled beforehand by scripts/build_kcpp.py
+# and listed here as prebuilt objects, so Kbuild links, runs objtool over and
+# modposts them exactly as it does the C ones.
+obj-m := kcpp.o
+kcpp-objs := top.o ser_mem.o ser_print.o ser_empty.o cpp_support.o driver.o
+ccflags-y += -Werror -I$(src)
