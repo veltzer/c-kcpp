@@ -15,7 +15,7 @@ def main():
         print(f"{sys.argv[0]}: usage: module count")
         sys.exit(1)
     module=sys.argv[1]
-    count=sys.argv[2]
+    count=int(sys.argv[2])
     print(f"module is {module}")
     print(f"count is {count}")
     for _ in range(count):
