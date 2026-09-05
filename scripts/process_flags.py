@@ -76,34 +76,27 @@ def find_first_ends_with(elems, ending):
 def main():
     """ main entry point """
     do_pass_kdir=True
-    do_clean=True
-    if len(sys.argv)!=4:
-        print(f"{sys.argv[0]}: usage: {sys.argv[0]} kdir std_module_dir outfile")
+    if len(sys.argv)!=5:
+        print(f"{sys.argv[0]}: usage: {sys.argv[0]} kdir build_dir object outfile")
         sys.exit(1)
     kdir=sys.argv[1]
-    std_module=os.path.abspath(sys.argv[2])
-    outfile=sys.argv[3]
+    build_dir=os.path.abspath(sys.argv[2])
+    obj=sys.argv[3]
+    outfile=sys.argv[4]
 
-    # build the sample module (described by the Kbuild file in std_module_dir,
-    # a scratch copy of src/std_module that scripts/build_kcpp.py makes in its
-    # temporary build directory) verbosely, so the kernel prints the exact
-    # gcc command line it uses
+    # have Kbuild compile a single C object of the module itself, verbosely,
+    # so it prints the exact gcc command line it uses. build_dir is the
+    # temporary copy of src/ that scripts/build_kcpp.py builds in, so the
+    # object is fresh and the full module build that follows reuses it.
     args=[
         "make",
         "-C", kdir if do_pass_kdir else f"/lib/modules/{os.uname().release}/build",
-        f"M={std_module}",
+        f"M={build_dir}",
         "V=1",
         "W=1",
     ]
-    if do_clean:
-        subprocess.check_output(args+["clean"])
-    output=subprocess.check_output(args+["modules"]).decode()
-    # split into lines and find the line that ends with "main.c"
+    output=subprocess.check_output(args+[obj]).decode()
     lines=output.split("\n")
-    # old code
-    # line=find_first_ends_with(lines, "main.c")
-    # line=line.strip()
-    # new code
     regexp = re.compile("^ *gcc")
     line=find_first_matches_regexp(lines, regexp)
     line = line.split(";")[0].strip()

@@ -54,7 +54,7 @@ src_dirs = ["."]
 [processor.explicit.kcpp]
 command = "scripts/build_kcpp.py"
 inputs = ["src/Kbuild", "scripts/build_kcpp.py", "scripts/process_flags.py"]
-input_globs = ["src/*.c", "src/*.cc", "src/*.h", "src/std_module/*.c"]
+input_globs = ["src/*.c", "src/*.cc", "src/*.h"]
 output_files = ["out/kcpp.ko", "out/flags.cfg"]
 
 # the module is compiled against kernel headers; on a CI runner that has no
@@ -66,8 +66,6 @@ system = ["linux-headers-generic"]
 [processor.checkpatch]
 src_dirs = ["src"]
 src_extensions = [".c"]
-# std_module is the flag-analysis sample; the generated kcpp.mod.c is in out/
-src_exclude_dirs = ["src/std_module"]
 
 # lint the GitHub Actions workflow files with actionlint
 [processor.actionlint]

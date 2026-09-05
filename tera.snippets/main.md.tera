@@ -1,5 +1,4 @@
-POC for writing C++ modules for the Linux kernel
-================================================
+# POC for writing C++ modules for the Linux kernel
 
 ## The problem:
 C++ has lots of issues which are not dealt with in the kernel.
@@ -32,8 +31,6 @@ may never happen...)
 ## Layout:
 * `src/` - the module sources: C, C++, headers and the `Kbuild` file that
 describes the module to the kernel build system.
-* `src/std_module/` - a minimal sample module, built only to read off the
-C flags the kernel uses so they can be adapted for the C++ parts.
 * `scripts/` - the build driver (`build_kcpp.py`, run by rsconstruct) and helpers.
 * `doc/` - notes on the problems met along the way, in markdown.
 * `out/` - the build results: `kcpp.ko` and the `flags.cfg` its C++ parts were

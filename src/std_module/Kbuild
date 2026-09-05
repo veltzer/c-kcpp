@@ -1,6 +1,0 @@
-# Minimal sample module, kept minimal on purpose: scripts/process_flags.py
-# builds it verbosely (in the temporary build directory) to capture the C
-# flags the kernel uses, which it then turns into the flags for the module's
-# C++ parts.
-obj-m := hello.o
-hello-objs := main.o

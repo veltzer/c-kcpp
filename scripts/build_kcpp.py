@@ -12,8 +12,9 @@ its MO= output mode creates.
 
 The module mixes C (built by Kbuild) with C++ that Kbuild cannot compile.
 The sequence, all inside the temporary directory, is:
-  1. scripts/process_flags.py builds the std_module sample and derives C++
-     compiler flags from the kernel's own C flags into flags.cfg
+  1. scripts/process_flags.py has Kbuild compile one of the module's own C
+     objects verbosely and derives C++ compiler flags from the gcc command
+     line it prints into flags.cfg
   2. every .cc file is compiled with g++ using those flags
   3. Kbuild builds the C objects and links the module, taking the C++
      objects as prebuilt members listed in Kbuild
@@ -45,6 +46,8 @@ NAME = "kcpp"
 SRC = "src"
 OUT = "out"
 FLAGS = "flags.cfg"
+# the C object whose compile command line the C++ flags are derived from
+FLAGS_PROBE_OBJECT = "top.o"
 RESULTS = [f"{NAME}.ko", FLAGS]
 
 
@@ -69,8 +72,8 @@ def kernel_build_dir():
 def build(kdir, build_dir):
     """ build the module inside build_dir, which holds a copy of src/ """
     scripts = os.path.dirname(os.path.abspath(__file__))
-    run([os.path.join(scripts, "process_flags.py"), kdir,
-         os.path.join(build_dir, "std_module"), os.path.join(build_dir, FLAGS)])
+    run([os.path.join(scripts, "process_flags.py"), kdir, build_dir, FLAGS_PROBE_OBJECT,
+         os.path.join(build_dir, FLAGS)])
     with open(os.path.join(build_dir, FLAGS), encoding="utf-8") as handle:
         flags = handle.read().split()
     for source in sorted(glob.glob(os.path.join(build_dir, "*.cc"))):
