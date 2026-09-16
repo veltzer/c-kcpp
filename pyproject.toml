@@ -1,0 +1,16 @@
+[project]
+name = "c-kcpp"
+version = "0.0.0"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "pylint",
+    "ruff",
+]
+
+[tool.uv]
+# Demo/teaching repo: not an installable package.
+package = false
