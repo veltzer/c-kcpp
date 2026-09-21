@@ -7,7 +7,6 @@ dependencies = []
 [dependency-groups]
 dev = [
     "mypy",
-    "pylint",
     "ruff",
 ]
 
