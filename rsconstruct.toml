@@ -16,7 +16,7 @@ reject_dot_src_dirs = true
 # listed here must exist: rsconstruct rejects a missing one at config load.
 # Repos still on config/*.py keep a dep_inputs override in their local
 # overlay until converted.
-[processor.tera]
+[processor.generator.tera]
 dep_auto = [
 	"config/project.lua",
 	"config/personal.lua",
@@ -26,19 +26,19 @@ src_dirs = ["tera.templates"]
 
 # ─── python ──────────────────────────────────────────────────────────────────
 
-[processor.ruff]
+[processor.checker.ruff]
 src_dirs = ["scripts", "config"]
 
 
-[processor.mypy]
+[processor.checker.mypy]
 src_dirs = ["scripts", "config"]
 
-[processor.luacheck]
+[processor.checker.luacheck]
 src_dirs = ["config"]
 
 # ─── toml / yaml / json ──────────────────────────────────────────────────────
 
-[processor.taplo]
+[processor.checker.taplo]
 src_files = [".rumdl.toml", "pyproject.toml", "rsconstruct.toml"]
 
 # ─── repo-specific configuration ────────────────────────────────────────────
@@ -51,7 +51,7 @@ src_files = [".rumdl.toml", "pyproject.toml", "rsconstruct.toml"]
 # runs in a temporary directory and only its results, kcpp.ko and flags.cfg,
 # are copied to out/. The Makefile's insmod/rmmod/log targets were
 # operational helpers, not build steps.
-[processor.explicit.kcpp]
+[processor.explicit.generic.kcpp]
 command = "scripts/build_kcpp.py"
 inputs = ["src/Kbuild", "scripts/build_kcpp.py", "scripts/process_flags.py"]
 input_globs = ["src/*.c", "src/*.cc", "src/*.h"]
@@ -63,23 +63,23 @@ output_files = ["out/kcpp.ko", "out/flags.cfg"]
 system = ["linux-headers-generic"]
 
 # the Makefile also ran the kernel's checkpatch.pl over the C sources
-[processor.checkpatch]
+[processor.checker.checkpatch]
 src_dirs = ["src"]
 src_extensions = [".c"]
 
 # lint the GitHub Actions workflow files with actionlint
-[processor.actionlint]
+[processor.checker.actionlint]
 src_dirs = [".github/workflows"]
 
 # ─── markdown ────────────────────────────────────────────────────────────────
 
-[processor.rumdl]
+[processor.checker.rumdl]
 src_dirs = ["doc"]
 src_files = ["README.md"]
 
 # ─── c / c++ ─────────────────────────────────────────────────────────────────
 
-[processor.cppcheck]
+[processor.checker.cppcheck]
 src_dirs = ["src"]
 args = [
 	"--error-exitcode=1",
