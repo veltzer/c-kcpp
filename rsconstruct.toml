@@ -33,7 +33,7 @@ src_dirs = ["scripts", "config"]
 [processor.checker.mypy]
 src_dirs = ["scripts", "config"]
 
-[processor.checker.luacheck]
+[processor.checker.iluacheck]
 src_dirs = ["config"]
 
 # ─── toml / yaml / json ──────────────────────────────────────────────────────
