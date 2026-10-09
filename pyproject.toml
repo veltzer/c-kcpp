@@ -6,10 +6,19 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-    "mypy",
+    "pyrefly",
     "ruff",
 ]
 
 [tool.uv]
 # Demo/teaching repo: not an installable package.
 package = false
+
+[tool.pyrefly]
+# Type checking (rsconstruct's pyrefly processor). preset = "legacy" is
+# pyrefly's mypy-compatible behavior; "." on the search path is mypy's
+# implicit current directory.
+preset = "legacy"
+search-path = [
+    ".",
+]

@@ -30,7 +30,7 @@ src_dirs = ["tera.templates"]
 src_dirs = ["scripts", "config"]
 
 
-[processor.checker.mypy]
+[processor.checker.pyrefly]
 src_dirs = ["scripts", "config"]
 
 [processor.checker.iluacheck]
