@@ -12,8 +12,6 @@ reject_dot_src_dirs = true
 
 # ─── templating ──────────────────────────────────────────────────────────────
 
-# Repos still on config/*.py keep a dep_inputs override in their local
-# overlay until converted.
 [processor.generator.tera]
 src_dirs = ["tera.templates"]
 
