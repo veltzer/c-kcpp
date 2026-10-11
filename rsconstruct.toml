@@ -63,7 +63,7 @@ output_files = ["out/kcpp.ko", "out/flags.cfg"]
 system = ["linux-headers-generic"]
 
 # the Makefile also ran the kernel's checkpatch.pl over the C sources
-[processor.checker.checkpatch]
+[processor.checker.icheckpatch]
 src_dirs = ["src"]
 src_extensions = [".c"]
 
