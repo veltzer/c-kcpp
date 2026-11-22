@@ -24,6 +24,7 @@ version: 0.0.1
 ### The problem
 
 C++ has lots of issues which are not dealt with in the kernel.
+
 * Problems in linking.
 * Exception handling that needs to be turned off.
 * Memory management functions (like new and delete) which need to be implemented.
@@ -32,6 +33,7 @@ since they conflict with many C++ constructs ('class' for instance and more).
 * The kernel build system does not compile C++ correctly, or even at all.
 
 ### The idea
+
 * separate the "top part" - the one that is getting called by Linux, like driver
 entry and exit points, interrupt functions, tasklets, whatever and handle them in a C layer.
 expose APIs for all of these facilities and other low level facilities (printk, hardware access
@@ -42,6 +44,7 @@ device driver writing based on OO concepts (inherit from Device and implement th
 methods).
 
 ### Future ideas
+
 * Add ability to include header files directly in C++ code.
 Progress: have 'copy_headers' target in makefile
 which also applies patch but headers are still hard to
@@ -51,6 +54,7 @@ may never happen...)
 * add a framework for writing char drivers
 
 ### Layout
+
 * `src/` - the module sources: C, C++, headers and the `Kbuild` file that
 describes the module to the kernel build system.
 * `scripts/` - the build driver (`build_kcpp.py`, run by rsconstruct) and helpers.
@@ -60,6 +64,7 @@ compiled with. The build itself runs in a temporary directory, so nothing else
 is produced. Not checked in; `rm -rf out` is a full clean.
 
 ### Related projects
+
 * <http://code.google.com/p/kernelcpp/>
 They do not have a buffer layer but instead do "extern C" before kernel headers.
 Try to see if this works for a big example.
