@@ -5,7 +5,7 @@
 
 description: C++ framework for the linux kernel
 
-project website: https://veltzer.github.io/c-kcpp
+project website: <https://veltzer.github.io/c-kcpp>
 
 author: Mark Veltzer
 
@@ -58,11 +58,11 @@ compiled with. The build itself runs in a temporary directory, so nothing else
 is produced. Not checked in; `rm -rf out` is a full clean.
 
 ### Related projects:
-* http://code.google.com/p/kernelcpp/
+* <http://code.google.com/p/kernelcpp/>
 They do not have a buffer layer but instead do "extern C" before kernel headers.
 Try to see if this works for a big example.
 They have all kinds of other ideas about constructors for global object and so on.
-* http://www.drdobbs.com/cpp/c-exceptions-the-linux-kernel/229100146
+* <http://www.drdobbs.com/cpp/c-exceptions-the-linux-kernel/229100146>
 
 ## contact me
 
