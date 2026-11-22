@@ -1,6 +1,8 @@
+
 ## POC for writing C++ modules for the Linux kernel
 
 ### The problem
+
 C++ has lots of issues which are not dealt with in the kernel.
 * Problems in linking.
 * Exception handling that needs to be turned off.

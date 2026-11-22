@@ -18,9 +18,11 @@ version: 0.0.1
 ## build
 
 ![build](https://github.com/veltzer/c-kcpp/workflows/build/badge.svg)
+
 ## POC for writing C++ modules for the Linux kernel
 
 ### The problem
+
 C++ has lots of issues which are not dealt with in the kernel.
 * Problems in linking.
 * Exception handling that needs to be turned off.
