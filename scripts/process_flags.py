@@ -35,11 +35,10 @@ def remove_two_in_a_row(elems, search):
     for elem in elems:
         if elem==search:
             found=True
+        elif found:
+            found=False
         else:
-            if found:
-                found=False
-            else:
-                res.append(elem)
+            res.append(elem)
     return res
 
 def remove_if_exists(elems, search):
@@ -63,15 +62,14 @@ def find_first_matches_regexp(elems, regexp):
     for elem in elems:
         if regexp.match(elem):
             return elem
-    assert False, "could not find element by regexp"
-    return None
+    raise AssertionError("could not find element by regexp")
 
 
 def find_first_ends_with(elems, ending):
     for elem in elems:
         if elem.endswith(ending):
             return elem
-    assert False, "element not found"
+    raise AssertionError("element not found")
 
 def main():
     """ main entry point """
@@ -95,7 +93,7 @@ def main():
         "V=1",
         "W=1",
     ]
-    output=subprocess.check_output(args+[obj]).decode()
+    output=subprocess.check_output([*args, obj]).decode()
     lines=output.split("\n")
     regexp = re.compile("^ *gcc")
     line=find_first_matches_regexp(lines, regexp)
