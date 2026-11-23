@@ -14,21 +14,11 @@ typedef void (*func_void_pvoid_pvoid_pvoid_pvoid)(void*,void*,void*,void*);
 extern "C" {
 #endif // __cplusplus
 
-// empty class
-void service_empty(void);
-
 // infrastructure calls
 void service_init(void);
 void service_finish(void);
 
-// general module name API's
-const char* service_modname(void);
-void service_bug(void);
-void service_stacktrace(void);
-
 // printing and debugging
-int service_printk(const char* fmt,...) __attribute__((format (printf, 1, 2)));
-int service_vprintk(const char* fmt,__builtin_va_list list);
 int service_puts(const char* s);
 
 // These are the pair of function you should use to register/unregister your
@@ -50,10 +40,8 @@ int service_in_interrupt(void) __attribute__((warn_unused_result));
 int service_in_irq(void) __attribute__((warn_unused_result));
 
 // memory allocation APIs
-void service_memcpy(const void* to,const void* from,unsigned int size);
 void* service_malloc(unsigned int) __attribute__((warn_unused_result));
 void service_free(void* pointer);
-void service_mdebug(void);
 
 // string functions
 void service_strncpy(char* dst,const char* src,unsigned int size);
@@ -112,12 +100,6 @@ void* service_register_irq(unsigned int irqnum,user_irq_handler irq_handler,void
 void service_free_irq(void* handle);
 void service_irq_disable(unsigned int irq);
 void service_irq_enable(unsigned int irq);
-
-// Memory addressing issues
-unsigned int service_get_page_size(void) __attribute__((warn_unused_result));
-unsigned long service_virt_to_phys(void* virt) __attribute__((warn_unused_result));
-void service_zeromem(void* addr,unsigned int size);
-void service_memset(void* addr,int c,unsigned int size);
 
 // IO operations
 unsigned char service_inb(unsigned int port);

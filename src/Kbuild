@@ -7,5 +7,5 @@
 # and listed here as prebuilt objects, so Kbuild links, runs objtool over and
 # modposts them exactly as it does the C ones.
 obj-m := kcpp.o
-kcpp-objs := top.o ser_mem.o ser_print.o ser_empty.o cpp_support.o driver.o
+kcpp-objs := top.o ser_mem.o ser_print.o cpp_support.o driver.o
 ccflags-y += -Werror -I$(src)

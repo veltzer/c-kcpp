@@ -17,6 +17,8 @@ package = false
 [tool.pyrefly]
 # Type checking (rsconstruct's pyrefly processor), with pyrefly's default
 # error set. "." on the search path is mypy's implicit current directory.
+# Warnings fail the check like errors (pyrefly lets them pass by default).
+min-severity = "warn"
 search-path = [
     ".",
 ]

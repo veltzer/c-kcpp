@@ -79,11 +79,13 @@ src_files = ["README.md"]
 
 # ─── c / c++ ─────────────────────────────────────────────────────────────────
 
+# One kernel module (src/Kbuild links every file into kcpp.ko): a single run over all of it.
 [processor.checker.cppcheck]
+batch = true
 src_dirs = ["src"]
 args = [
 	"--error-exitcode=1",
-	"--enable=warning,style,performance,portability",
+	"--enable=warning,style,performance,portability,information,unusedFunction",
 	"--check-level=exhaustive",
 	"--inline-suppr",
 ]
