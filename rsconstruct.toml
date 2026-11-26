@@ -58,6 +58,11 @@ system = ["linux-headers-generic"]
 src_dirs = ["src"]
 src_extensions = [".c"]
 
+# lint the YAML files with yamllint (policy: .yamllint.yaml)
+[processor.checker.iyamllint]
+src_dirs = [".github"]
+src_files = [".yamllint.yaml"]
+
 # lint the GitHub Actions workflow files with actionlint
 [processor.checker.iactionlint]
 src_dirs = [".github/workflows"]
