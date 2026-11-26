@@ -108,7 +108,7 @@ def main():
     # remove macros of the kernel (which we dont use in the cpp layer)
     # flag_list = remove_begin_with(flag_list, "-D")
     # remove the -Wp, MD
-    # TODO - this was remarked because the -Wp -MD flags were not found. Is this ok?
+    # removing -Wp,-MMD was added when the -Wp -MD flags stopped being found (doc/TOFIX.md)
     flag_list=remove_begin_with(flag_list, "-Wp,-MMD")
     # remove -include and -isystem (which we dont use in the cpp layer)
     flag_list = remove_two_in_a_row(flag_list, "-isystem")

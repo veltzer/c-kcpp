@@ -20,3 +20,4 @@ Findings from a code scan on 2026-10-04.
 - `src/cpp_support.cc:12` - `operator new(unsigned long)` passes its size to `service_malloc(unsigned int)` (`src/services.h:217`), silently truncating sizes above 4 GiB; widen the service signature to `unsigned long`.
 - `tera.snippets/main.md.tera:24-26` - README mentions a `copy_headers` target "in makefile", but the Makefile was removed (see `rsconstruct.toml` comment); update or drop the paragraph.
 - `tera.snippets/main.md.tera:40` - `http://code.google.com/p/kernelcpp/` is a dead Google Code link; point to an archive or remove it.
+- `scripts/process_flags.py` - the `-Wp,-MMD` removal was added because the `-Wp -MD` flags were not found; check that this is right. (was a TODO comment in the code)
