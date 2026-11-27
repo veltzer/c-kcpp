@@ -9,7 +9,7 @@ import os
 import sys
 
 
-def main():
+def main() -> None:
     """ main entry point """
     if len(sys.argv)!=3:
         print(f"{sys.argv[0]}: usage: module count")

@@ -51,14 +51,14 @@ FLAGS_PROBE_OBJECT = "top.o"
 RESULTS = [f"{NAME}.ko", FLAGS]
 
 
-def run(args, cwd=None):
+def run(args: list[str], cwd: str | None = None) -> None:
     """ run a command, aborting the build on failure """
     ret = subprocess.call(args, cwd=cwd)
     if ret != 0:
         sys.exit(ret)
 
 
-def kernel_build_dir():
+def kernel_build_dir() -> str:
     """ pick the kernel headers to build against """
     running = f"/lib/modules/{os.uname().release}/build"
     if os.path.isdir(running):
@@ -69,7 +69,7 @@ def kernel_build_dir():
     return candidates[-1]
 
 
-def build(kdir, build_dir):
+def build(kdir: str, build_dir: str) -> None:
     """ build the module inside build_dir, which holds a copy of src/ """
     scripts = os.path.dirname(os.path.abspath(__file__))
     run([os.path.join(scripts, "process_flags.py"), kdir, build_dir, FLAGS_PROBE_OBJECT,
@@ -89,7 +89,7 @@ def build(kdir, build_dir):
          "CROSS_COMPILE=x86_64-linux-gnu-", "modules"])
 
 
-def main():
+def main() -> None:
     """ main entry point """
     kdir = os.environ.get("KDIR") or kernel_build_dir()
     with tempfile.TemporaryDirectory(prefix=f"{NAME}-build-") as build_dir:

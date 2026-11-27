@@ -9,6 +9,7 @@ import os
 import re
 import subprocess
 import sys
+from re import Pattern
 
 # General guide to compiler flags (this is true in MOST cases, not in ALL
 # cases, check each flag...)
@@ -16,7 +17,7 @@ import sys
 # flags starting with -W: produce more warnings, dont affect code generation
 
 
-def remove_begin_with(elems, search):
+def remove_begin_with(elems: list[str], search: str):
     """ removed all elemnets from a python list that begin with ... """
     found=False
     res=[]
@@ -28,7 +29,7 @@ def remove_begin_with(elems, search):
     assert found, f"could not find stuff begining with [{search}]"
     return res
 
-def remove_two_in_a_row(elems, search):
+def remove_two_in_a_row(elems: list[str], search: str):
     """ remove two elements in a row from a list """
     res=[]
     found=False
@@ -41,13 +42,13 @@ def remove_two_in_a_row(elems, search):
             res.append(elem)
     return res
 
-def remove_if_exists(elems, search):
+def remove_if_exists(elems: list[str], search: str):
     """ remove all elements from a list that contain a substring """
     if search in elems:
         elems.remove(search)
     return elems
 
-def find_ends_with(elems, ending):
+def find_ends_with(elems: list[str], ending: str):
     """ return a single element in a list that has a certain ending """
     found = None
     found_count=0
@@ -58,20 +59,20 @@ def find_ends_with(elems, ending):
     assert found_count==1, f"found too many or too little [{found_count}]"
     return found
 
-def find_first_matches_regexp(elems, regexp):
+def find_first_matches_regexp(elems: list[str], regexp: Pattern[str]):
     for elem in elems:
         if regexp.match(elem):
             return elem
     raise AssertionError("could not find element by regexp")
 
 
-def find_first_ends_with(elems, ending):
+def find_first_ends_with(elems: list[str], ending: str):
     for elem in elems:
         if elem.endswith(ending):
             return elem
     raise AssertionError("element not found")
 
-def main():
+def main() -> None:
     """ main entry point """
     do_pass_kdir=True
     if len(sys.argv)!=5:
