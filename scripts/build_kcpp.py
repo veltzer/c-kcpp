@@ -79,7 +79,7 @@ def build(kdir, build_dir):
     for source_path in sorted(glob.glob(os.path.join(build_dir, "*.cc"))):
         source = os.path.basename(source_path)
         obj = source[:-3] + ".o"
-        cmd = ["g++", *flags, "-Wall", "-Werror", "-I.", "-c", "-o", obj, source]
+        cmd = ["g++", *flags, "-Wall", "-Wextra", "-Werror", "-I.", "-c", "-o", obj, source]
         run(cmd, cwd=build_dir)
         # what Kbuild records for the objects it compiles itself; modpost
         # reads it to find the object's source file
