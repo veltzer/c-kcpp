@@ -105,8 +105,6 @@ def main():
     # C++ code does not reference any header files of the kernel,
     # operating system, or compiler...
     flag_list = remove_begin_with(flag_list, "-I")
-    # remove macros of the kernel (which we dont use in the cpp layer)
-    # flag_list = remove_begin_with(flag_list, "-D")
     # remove the -Wp, MD
     # removing -Wp,-MMD was added when the -Wp -MD flags stopped being found (doc/TOFIX.md)
     flag_list=remove_begin_with(flag_list, "-Wp,-MMD")
@@ -114,9 +112,6 @@ def main():
     flag_list = remove_two_in_a_row(flag_list, "-isystem")
     flag_list = remove_two_in_a_row(flag_list, "-include")
     flag_list = remove_two_in_a_row(flag_list, "-o")
-    # if the kernel was compiled with debug and profiling then we dont
-    # need it
-    # flag_list.remove("-pg")
     flag_list.remove("-c")
     remove_flags = {
         "-nostdinc", # header file stuff, does not influence code generation
@@ -140,7 +135,6 @@ def main():
     }
     for remove_flag in remove_flags:
         remove_if_exists(flag_list, remove_flag)
-    # l.remove("-g")
     # remove flags which are not valid for C++...
     # cc1plus: warning: command line option "-Wstrict-prototypes" is valid for
     # C/ObjC but not for C++ [enabled by default]
